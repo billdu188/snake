@@ -6,14 +6,10 @@
 <title>Snake</title>
 <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 <style>
-	body {}
+	body {margin: 0; padding: 0; list-style: none;}
 	#box { width: 500px; height: 500px; border: 1px solid #EBF70E; border-radius: 10px; position: relative;}
 	#btn { width: 100px; height: 50px; border: none; border-radius: 5px; position: relative;}
 	.food1 { width: 16px; height: 16px; background-color: #050000; position: relative;}
-	.food2 {}
-	.food3 {}
-	.snackbody {}
-	.snackHead {}
 	#score {width: 100px; height: 20px; border: 1px solid red; margin: 20px; padding: 0 5px; visibility: hidden;}
 </style>
 <script>
@@ -32,14 +28,9 @@ var Game = {
 		this.oParent = document.getElementById(id);
 		this.createScore();
 		this.drawFood();
-
 		this.drawSnack();
 		this.runSnack();
-
-
 	},
-	
-
 	//食物数据
 	Food : {
 		food1: {style:'food1', score:1, duration:5000},
@@ -47,13 +38,14 @@ var Game = {
 		food3: {style:'food2', score:3, duration:5000}
 	},
 
-	//gk数据
+	//拓展
+	/*//gk数据
 	gk : {},
 
 	//snack数据
 	snack : {
 		
-	},
+	},*/
 
 	//创建积分
 	createScore : function () {
@@ -68,38 +60,26 @@ var Game = {
 
 		
 	},
-
-	//绘制地图
-	drawMap : function () {
-		
-	},
-
 	//创建食物
 	drawFood : function () {
-		
 		this.food = document.createElement('div');
 		this.food.className = 'food1';
 		this.oParent.appendChild(this.food);
-
 		this.food.style.left = Math.floor(Math.random()*500) + 'px' ;
 		this.food.style.top = Math.floor(Math.random()*500) + 'px';
 	
 	},
-
 	//绘制小蛇
 	drawSnack : function() {
 		
 		var bigSnack = [[0,10,"green",null], [20,10,"yellow",null],[40,10,"blue",null], [40,10,"red",null]];
-
-		this.bigSnack = bigSnack;
-		
+		this.bigSnack = bigSnack;	
 		this.mapSnack();
 	},
 
 	mapSnack : function () {
 		for (var i=0; i<this.bigSnack.length; i++) {
-			this.bigSnack[i][3] = document.createElement('div');
-					
+			this.bigSnack[i][3] = document.createElement('div');		
 			this.bigSnack[i][3].style.backgroundColor = this.bigSnack[i][2];
 			this.bigSnack[i][3].style.height = 20 +'px';
 			this.bigSnack[i][3].style.width = 20 + 'px';
@@ -204,11 +184,9 @@ var Game = {
 				This.drawFood();
 				This.numScore = parseInt(This.numScore) + 1;
 				score.value = '积分：' + This.numScore + '分';
-				
-				console.log()
 			}			
-			//死			
-			if (This.bigSnack[This.bigSnack.length-1][0] < This.oParent.offsetLeft || This.bigSnack[This.bigSnack.length-1][0] > This.oParent.offsetLeft + This.oParent.offsetWidth || This.bigSnack[This.bigSnack.length-1][1] < This.oParent.offsetTop || This.bigSnack[This.bigSnack.length-1][1] > This.oParent.offsetTop + This.oParent.offsetHeight) {
+			//小蛇死亡			
+			if (This.bigSnack[This.bigSnack.length-1][0]+27 < This.oParent.offsetLeft || This.bigSnack[This.bigSnack.length-1][0]+27 > This.oParent.offsetLeft + This.oParent.offsetWidth || This.bigSnack[This.bigSnack.length-1][1]+27 < This.oParent.offsetTop || This.bigSnack[This.bigSnack.length-1][1]+27 > This.oParent.offsetTop + This.oParent.offsetHeight) {
 				clearInterval(timer);
 				alert("game over!");
 				location.reload();
@@ -241,7 +219,5 @@ var Game = {
 		<input type="button" id="btn" value="Let'go!!"/>
 	</div>
 	<input type="text" id="score" value="积分：0 分"></input>
-	
-	
 </body>
 </html>
